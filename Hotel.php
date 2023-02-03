@@ -48,8 +48,16 @@ class Hotel {
         $this->ville = $ville;
     }
 
+    public function ajouterChambre(Chambre $chambre) {
+        $this->nb_chambres[] = $chambre;
+    }
+
+    public function afficherInfos() {
+        return $this."$this->rue $this->cp $this->ville<br>Nombre de chambres : ".count($this->nb_chambres)."<br>Nombre de chambres réservées : "."<br>Nombre de chambres disponibles : ";
+    }
+
     public function __toString() {
-        return "$this->nom ".str_repeat("*", $nb_etoiles). " $this->ville<br>";
+        return "$this->nom ".str_repeat("*", $this->nb_etoiles). " $this->ville<br>";
     }
 }
 ?>

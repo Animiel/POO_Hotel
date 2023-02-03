@@ -4,16 +4,17 @@ class Chambre {
     private int $nb_lits;
     private bool $wifi;
     private int $prix;
-    private string $etat;
+    private string $etat = "";
     private Hotel $hotel;
 
-    public function __construct(int $numero, int $nb_lits, bool $wifi, int $prix, string $etat = "", Hotel $hotel) {
+    public function __construct(int $numero, int $nb_lits, bool $wifi, int $prix, string $etat, Hotel $hotel) {
         $this->numero = $numero;
         $this->nb_lits = $nb_lits;
         $this->wifi = $wifi;
         $this->prix = $prix;
         $this->etat = "Disponible";
         $this->hotel = $hotel;
+        $this->hotel->ajouterChambre($this);
     }
 
     public function getNumero() {
