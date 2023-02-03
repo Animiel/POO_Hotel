@@ -26,9 +26,26 @@ class Client {
         $this->prenom = $prenom;
     }
 
-    // public function addReservation(Reservation $reservation) {
-    //     $this->listeReservations[] = $reservation;
-    // }
+    public function ajouterReservation(Reservation $reservation) {
+        $this->listeReservations[] = $reservation;
+    }
+
+    public function totalPrix() {
+        $total = 0;
+        foreach ($this->listeReservations as $reservation) {
+            $total += $reservation->getChambre()->getPrix() * $reservation->dureeSejour($reservation->getDateArrivee(), $reservation->getDateFin());
+        }
+        return $total;
+    }
+
+    public function afficherReservation() {
+        $result = "Réservations de $this<br>".count($this->listeReservations)." réservations<br>";
+        foreach ($this->listeReservations as $reservation) {
+            $result .= ($reservation->getChambre())->getHotel()." / ".$reservation->getChambre()." (".($reservation->getChambre())->getNbLits()." lits - ".($reservation->getChambre())->getPrix()."€ - Wifi: ".($reservation->getChambre())->getWifi().") du ".$reservation->getDateArrivee()." au ".$reservation->getDateFin()."<br>";
+        }
+        $result .= "Total : ".$this->totalPrix()."€<br>";
+        return $result;
+    }
 
     public function __toString() {
         return "$this->nom $this->prenom";

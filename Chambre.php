@@ -34,7 +34,14 @@ class Chambre {
     }
 
     public function getWifi() {
-        return $this->wifi;
+        $result = "";
+        if ($this->wifi == false) {
+            $result = "non";
+        }
+        else {
+            $result = "oui";
+        }
+        return $result;
     }
 
     public function setWifi(bool $wifi) {

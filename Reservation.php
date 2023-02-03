@@ -11,6 +11,7 @@ class Reservation {
         $this->chambre->setEtat("Réservé");             ///!\Penser à modifier une propriété pour accéder à une autre : hotel de la chambre n'est pas accessible (private) mais en changeant l'état de la chambre on peut récupérer la réservation de l'hotel en question.
         $this->date_arrivee = new DateTime($date_arrivee);
         $this->date_fin = new DateTime($date_fin);
+        $this->client->ajouterReservation($this);
     }
 
     public function getClient() {
@@ -27,6 +28,11 @@ class Reservation {
 
     public function getDateFin() {
         return $this->date_fin->format('d/m/Y');
+    }
+
+    public function dureeSejour($date_arrivee, $date_fin) {
+        $duree = $this->date_arrivee->diff($this->date_fin);
+        return $duree->format('%a');
     }
 }
 ?>

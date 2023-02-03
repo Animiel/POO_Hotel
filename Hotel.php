@@ -6,7 +6,6 @@ class Hotel {
     private string $cp;
     private string $ville;
     private array $nb_chambres;
-    private array $listeReservations;
 
     public function __construct(string $nom, string $rue, string $cp, string $ville, $nb_etoiles) {
         $this->nom = $nom;
@@ -15,7 +14,6 @@ class Hotel {
         $this->cp = $cp;
         $this->ville = $ville;
         $this->nb_chambres = [];
-        $this->listeReservations = [];
     }
 
     public function getNom() {
@@ -54,10 +52,6 @@ class Hotel {
         return $this->nb_chambres;
     }
 
-    public function getListeReservations() {
-        return $this->listeReservations;            //possible mais echo $this->getListeReservations renverra une erreur.
-    }
-
     public function ajouterChambre(Chambre $chambre) {
         $this->nb_chambres[] = $chambre;
     }
@@ -76,15 +70,20 @@ class Hotel {
     }
 
     public function afficherInfos() {
-        return $this."$this->rue $this->cp $this->ville<br>Nombre de chambres : ".count($this->nb_chambres)."<br>Nombre de chambres réservées : ".$this->getReservees()."<br>Nombre de chambres disponibles : ". $this->getDisponibles();
+        return $this."<br>$this->rue $this->cp $this->ville<br>Nombre de chambres : ".count($this->nb_chambres)."<br>Nombre de chambres réservées : ".$this->getReservees()."<br>Nombre de chambres disponibles : ". $this->getDisponibles();
     }
 
-    public function ajouterReservation(Reservation $reservation) {
-        $this->listeReservations[] = $reservation;
-    }
+    // public function afficherReservations() {
+    //     $result = "Réservations de l'hôtel $this<br>".$this->getReservees()." réservations.<br>";
+    //     foreach ($this->nb_chambres as $chambre) {
+    //         if($chambre->getEtat() == "Réservé") {
+    //             $result .= "";
+    //         }
+    //     }
+    // }
 
     public function __toString() {
-        return "$this->nom ".str_repeat("*", $this->nb_etoiles). " $this->ville<br>";
+        return "$this->nom ".str_repeat("*", $this->nb_etoiles). " $this->ville";
     }
 }
 ?>
