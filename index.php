@@ -16,6 +16,7 @@ $reservation1 = new Reservation($client1, $chambre1, "2023-02-03", "2023-02-10")
 $reservation2 = new Reservation($client2, $chambre2, "2023-05-12", "2023-05-26");
 $reservation3 = new Reservation($client1, $chambre3, "2023-01-16", "2023-03-03");
 
-echo $hotel1->afficherInfos()."<br>";
-echo $client1->afficherReservation();
+// echo $hotel1->afficherInfos()."<br>";
+// echo $client1->afficherReservation();
+echo $hotel1->afficherChambre();
 ?>

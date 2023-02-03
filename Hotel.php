@@ -56,6 +56,22 @@ class Hotel {
         $this->nb_chambres[] = $chambre;
     }
 
+    public function afficherChambre() {
+        $result = "<table>
+        <tr>
+            <th>CHAMBRE</th>
+            <th>PRIX</th>
+            <th>WIFI</th>
+            <th>ETAT</th>
+        </tr>
+        <tbody>";
+        foreach ($this->nb_chambres as $chambre) {
+            $result .= "<tr><td>Chambre ".$chambre->getNumero()."</td><td>".$chambre->getPrix()."</td><td>".$chambre->getWifi()."</td><td>".$chambre->getEtat()."</td></tr>";
+        }
+        $result .= "</tbody></table>";
+        return $result;
+    }
+
     public function getReservees() {
         $nb = 0;
         foreach ($this->nb_chambres as $chambre) {
