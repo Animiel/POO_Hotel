@@ -8,10 +8,11 @@ class Reservation {
     public function __construct(Client $client, Chambre $chambre, string $date_arrivee, string $date_fin) {
         $this->client = $client;
         $this->chambre = $chambre;
-        $this->chambre->setEtat("Réservé");             ///!\Penser à modifier une propriété pour accéder à une autre : hotel de la chambre n'est pas accessible (private) mais en changeant l'état de la chambre on peut récupérer la réservation de l'hotel en question.
         $this->date_arrivee = new DateTime($date_arrivee);
         $this->date_fin = new DateTime($date_fin);
+        $this->chambre->setEtat("<span class='res'>Réservé</span>");             ///!\Penser à modifier une propriété pour accéder à une autre : hotel de la chambre n'est pas accessible (private) mais en changeant l'état de la chambre on peut récupérer la réservation de l'hotel en question.
         $this->client->ajouterReservation($this);
+        $this->chambre->getHotel()->ajouterReservation($this);
     }
 
     public function getClient() {

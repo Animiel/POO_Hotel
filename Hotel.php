@@ -6,6 +6,7 @@ class Hotel {
     private string $cp;
     private string $ville;
     private array $nb_chambres;
+    private array $listeReservations;
 
     public function __construct(string $nom, string $rue, string $cp, string $ville, $nb_etoiles) {
         $this->nom = $nom;
@@ -14,6 +15,7 @@ class Hotel {
         $this->cp = $cp;
         $this->ville = $ville;
         $this->nb_chambres = [];
+        $this->listeReservations = [];
     }
 
     public function getNom() {
@@ -57,7 +59,7 @@ class Hotel {
     }
 
     public function afficherChambre() {
-        $result = "<table>
+        $result = "<table><caption>Statuts des chambres de <strong>$this</strong></caption>
         <tr>
             <th>CHAMBRE</th>
             <th>PRIX</th>
@@ -66,7 +68,7 @@ class Hotel {
         </tr>
         <tbody>";
         foreach ($this->nb_chambres as $chambre) {
-            $result .= "<tr><td>Chambre ".$chambre->getNumero()."</td><td>".$chambre->getPrix()."</td><td>".$chambre->getWifi()."</td><td>".$chambre->getEtat()."</td></tr>";
+            $result .= "<tr><td>Chambre ".$chambre->getNumero()."</td><td>".$chambre->getPrix()."</td><td>".$chambre->getWifi2()."</td><td>".$chambre->getEtat()."</td></tr>";
         }
         $result .= "</tbody></table>";
         return $result;
@@ -75,7 +77,7 @@ class Hotel {
     public function getReservees() {
         $nb = 0;
         foreach ($this->nb_chambres as $chambre) {
-            if($chambre->getEtat() == "Réservé")        //Ayant changé l'état on peut récupérer les réservations de l'hotel spécifié.
+            if($chambre->getEtat() == "<span class='res'>Réservé</span>")        //Ayant changé l'état on peut récupérer les réservations de l'hotel spécifié.
              $nb++;
         }
         return $nb;
@@ -86,17 +88,20 @@ class Hotel {
     }
 
     public function afficherInfos() {
-        return $this."<br>$this->rue $this->cp $this->ville<br>Nombre de chambres : ".count($this->nb_chambres)."<br>Nombre de chambres réservées : ".$this->getReservees()."<br>Nombre de chambres disponibles : ". $this->getDisponibles();
+        return "<strong>".$this."</strong><br>$this->rue $this->cp $this->ville<br>Nombre de chambres : ".count($this->nb_chambres)."<br>Nombre de chambres réservées : ".$this->getReservees()."<br>Nombre de chambres disponibles : ". $this->getDisponibles();
     }
 
-    // public function afficherReservations() {
-    //     $result = "Réservations de l'hôtel $this<br>".$this->getReservees()." réservations.<br>";
-    //     foreach ($this->nb_chambres as $chambre) {
-    //         if($chambre->getEtat() == "Réservé") {
-    //             $result .= "";
-    //         }
-    //     }
-    // }
+    public function ajouterReservation(Reservation $reservation) {
+        $this->listeReservations[] = $reservation;
+    }
+
+    public function afficherReservation() {
+        $result = "<strong>Réservations de l'hôtel $this</strong><br><span>".$this->getReservees()." réservations.</span><br>";
+        foreach ($this->listeReservations as $reservation) {
+            $result .= $reservation->getClient()->getNom()." ".$reservation->getClient()->getPrenom()." - Chambre ".$reservation->getChambre()->getNumero()." - du ".$reservation->getDateArrivee()." au ".$reservation->getDateFin()."<br>";
+        }
+        return $result;
+    }
 
     public function __toString() {
         return "$this->nom ".str_repeat("*", $this->nb_etoiles). " $this->ville";
