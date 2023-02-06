@@ -11,7 +11,12 @@ class Chambre {
         $this->numero = $numero;
         $this->nb_lits = $nb_lits;
         $this->wifi = $wifi;
+        if ($this->wifi == true || $this->wifi == "<i class='fa-solid fa-wifi'></i>") {
+            $this->prix = $prix + 20;
+        }
+        else {
         $this->prix = $prix;
+        }
         $this->etat = "<span class='dispo'>Disponible</span>";
         $this->hotel = $hotel;
         $this->hotel->ajouterChambre($this);
@@ -50,7 +55,6 @@ class Chambre {
             $result = "<i class='fa-solid fa-wifi'></i>";       //depuis site font awesome --> charge icone --> pour la cibler 'fa-wifi'. 'fa-solid' peut être présent chez plusieurs icones.
         }
         return $result;
-
     }
 
     public function setWifi(bool $wifi) {
@@ -75,6 +79,10 @@ class Chambre {
 
     public function getHotel() {
         return $this->hotel;
+    }
+
+    public function detailChambre() {
+        return "La $this compte $this->nb_lits lits et un réseau wifi : <strong>".$this->getWifi()."</strong>. Son prix est de $this->prix €.<br>";
     }
 
     public function __toString() {

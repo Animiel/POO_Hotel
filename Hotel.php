@@ -68,7 +68,7 @@ class Hotel {
         </tr>
         <tbody>";
         foreach ($this->nb_chambres as $chambre) {
-            $result .= "<tr><td>Chambre ".$chambre->getNumero()."</td><td>".$chambre->getPrix()."</td><td>".$chambre->getWifi2()."</td><td>".$chambre->getEtat()."</td></tr>";
+            $result .= "<tr><td>Chambre ".$chambre->getNumero()."<br>".$chambre->detailChambre()."</td><td>".$chambre->getPrix()."</td><td>".$chambre->getWifi2()."</td><td>".$chambre->getEtat()."</td></tr>";
         }
         $result .= "</tbody></table>";
         return $result;
@@ -77,7 +77,7 @@ class Hotel {
     public function getReservees() {
         $nb = 0;
         foreach ($this->nb_chambres as $chambre) {
-            if($chambre->getEtat() == "<span class='res'>Réservé</span>")        //Ayant changé l'état on peut récupérer les réservations de l'hotel spécifié.
+            if($chambre->getEtat() == "<span class='res'>Réservée</span>")        //Ayant changé l'état on peut récupérer les réservations de l'hotel spécifié.
              $nb++;
         }
         return $nb;
@@ -98,7 +98,7 @@ class Hotel {
     public function afficherReservation() {
         $result = "<strong>Réservations de l'hôtel $this</strong><br><span>".$this->getReservees()." réservations.</span><br>";
         foreach ($this->listeReservations as $reservation) {
-            $result .= $reservation->getClient()->getNom()." ".$reservation->getClient()->getPrenom()." - Chambre ".$reservation->getChambre()->getNumero()." - du ".$reservation->getDateArrivee()." au ".$reservation->getDateFin()."<br>";
+            $result .= "<strong>".$reservation->getClient()->getNom()." ".$reservation->getClient()->getPrenom()."</strong> - Chambre ".$reservation->getChambre()->getNumero()." - du ".$reservation->getDateArrivee()." au ".$reservation->getDateFin()."<br>";
         }
         return $result;
     }

@@ -41,7 +41,7 @@ class Client {
     public function afficherReservation() {
         $result = "<strong>Réservations de $this</strong><br><span>".count($this->listeReservations)." réservations</span><br>";
         foreach ($this->listeReservations as $reservation) {
-            $result .= ($reservation->getChambre())->getHotel()." / ".$reservation->getChambre()." (".($reservation->getChambre())->getNbLits()." lits - ".($reservation->getChambre())->getPrix()."€ - Wifi: ".($reservation->getChambre())->getWifi().") du ".$reservation->getDateArrivee()." au ".$reservation->getDateFin()."<br>";
+            $result .= "<strong>".($reservation->getChambre())->getHotel()."</strong> / ".$reservation->getChambre()." (".($reservation->getChambre())->getNbLits()." lits - ".($reservation->getChambre())->getPrix()."€ - Wifi: ".($reservation->getChambre())->getWifi().") du ".$reservation->getDateArrivee()." au ".$reservation->getDateFin()."<br>";
         }
         $result .= "Total : ".$this->totalPrix()."€<br>";
         return $result;
