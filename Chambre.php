@@ -17,7 +17,7 @@ class Chambre {
         else {
         $this->prix = $prix + ($this->nb_lits * 20);
         }
-        $this->etat = "<span class='dispo'>Disponible</span>";
+        $this->etat = "Disponible";
         $this->hotel = $hotel;
         $this->hotel->ajouterChambre($this);
     }

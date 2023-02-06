@@ -68,7 +68,14 @@ class Hotel {
         </tr>
         <tbody>";
         foreach ($this->nb_chambres as $chambre) {
-            $result .= "<tr><td><strong>Chambre ".$chambre->getNumero()."</strong><br><small>La chambre compte ".$chambre->getNbLits()." lits.</small></td><td>".$chambre->getPrix()."</td><td>".$chambre->getWifi2()."</td><td>".$chambre->getEtat()."</td></tr>";
+            $result .= "<tr><td><strong>Chambre ".$chambre->getNumero()."</strong><br><small>La chambre compte ".$chambre->getNbLits()." lits.</small></td><td>".$chambre->getPrix()."</td><td>".$chambre->getWifi2()."</td><td>";
+            if ($chambre->getEtat()=="Reservée") {
+                $result .= "<span class='res'>Réservée</span>";
+            }
+            else{
+                $result .= "<span class='dispo'>Disponible</span>";
+            }
+            echo "</td></tr>";
         }
         $result .= "</tbody></table>";
         return $result;
