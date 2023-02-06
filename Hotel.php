@@ -68,7 +68,7 @@ class Hotel {
         </tr>
         <tbody>";
         foreach ($this->nb_chambres as $chambre) {
-            $result .= "<tr><td>Chambre ".$chambre->getNumero()."<br>".$chambre->detailChambre()."</td><td>".$chambre->getPrix()."</td><td>".$chambre->getWifi2()."</td><td>".$chambre->getEtat()."</td></tr>";
+            $result .= "<tr><td><strong>Chambre ".$chambre->getNumero()."</strong><br><small>La chambre compte ".$chambre->getNbLits()." lits.</small></td><td>".$chambre->getPrix()."</td><td>".$chambre->getWifi2()."</td><td>".$chambre->getEtat()."</td></tr>";
         }
         $result .= "</tbody></table>";
         return $result;

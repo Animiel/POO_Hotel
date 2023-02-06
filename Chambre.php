@@ -12,10 +12,10 @@ class Chambre {
         $this->nb_lits = $nb_lits;
         $this->wifi = $wifi;
         if ($this->wifi == true || $this->wifi == "<i class='fa-solid fa-wifi'></i>") {
-            $this->prix = $prix + 20;
+            $this->prix = $prix +($this->nb_lits * 20) + 5;
         }
         else {
-        $this->prix = $prix;
+        $this->prix = $prix + ($this->nb_lits * 20);
         }
         $this->etat = "<span class='dispo'>Disponible</span>";
         $this->hotel = $hotel;
@@ -79,10 +79,6 @@ class Chambre {
 
     public function getHotel() {
         return $this->hotel;
-    }
-
-    public function detailChambre() {
-        return "La $this compte $this->nb_lits lits et un réseau wifi : <strong>".$this->getWifi()."</strong>. Son prix est de $this->prix €.<br>";
     }
 
     public function __toString() {

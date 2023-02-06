@@ -36,11 +36,11 @@ echo $client1->afficherReservation()."<br>";
 echo $client2->afficherReservation()."<br>";
 echo $hotel1->afficherChambre()."<br>";
 
-function creerChambres(int $nb,int $j, int $prix, string $etat, Hotel $hotel) {
+function creerChambres(int $nb,int $numero, int $prix, string $etat, Hotel $hotel) {
     for ($i = 1; $i <= $nb; $i++) {
         $create = "chambre".$i;
-        $$create = new Chambre($j, rand(1, 5), rand(0, 1), $prix, $etat, $hotel);
-        $j++;
+        $$create = new Chambre($numero, rand(1, 5), rand(0, 1), $prix, $etat, $hotel);
+        $numero++;
     }
     return $$create;
 }
